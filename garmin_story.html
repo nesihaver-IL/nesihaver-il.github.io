@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nesi Haver — My Garmin Story</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --navy: #0d1b2a;
+  --panel: #152637;
+  --card: #1e3448;
+  --teal: #00D4AA;
+  --orange: #FF6B35;
+  --purple: #7B61FF;
+  --yellow: #FFD166;
+  --text: #e8edf2;
+  --muted: #6b8fa8;
+  --border: rgba(0,212,170,0.15);
+  --radius: 16px;
+  --radius-sm: 10px;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--navy);
+  color: var(--text);
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Layout ─────────────────────────────────────────── */
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+section { padding: 80px 0; }
+section:nth-child(even) { background: var(--panel); }
+
+/* ── Nav ─────────────────────────────────────────────── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: rgba(13,27,42,0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  padding: 14px 24px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+nav .logo { font-size: 1rem; font-weight: 700; color: var(--teal); letter-spacing: 0.05em; }
+nav .nav-links { display: flex; gap: 28px; }
+nav .nav-links a {
+  color: var(--muted); text-decoration: none; font-size: 0.85rem;
+  font-weight: 500; letter-spacing: 0.03em; transition: color 0.2s;
+}
+nav .nav-links a:hover { color: var(--teal); }
+
+/* ── Hero ────────────────────────────────────────────── */
+.hero {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0a1520 0%, #0d1b2a 40%, #0f2638 70%, #091520 100%);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  text-align: center;
+  position: relative; overflow: hidden;
+  padding-top: 60px;
+}
+.hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 80% 60% at 50% 40%, rgba(0,212,170,0.07) 0%, transparent 60%);
+  pointer-events: none;
+}
+.hero-eyebrow {
+  font-size: 0.75rem; font-weight: 600; letter-spacing: 0.2em;
+  color: var(--teal); text-transform: uppercase; margin-bottom: 20px;
+}
+.hero-name {
+  font-size: clamp(3.5rem, 10vw, 8rem);
+  font-weight: 900; letter-spacing: -0.03em; line-height: 1;
+  color: #fff; margin-bottom: 24px;
+}
+.hero-name span { color: var(--teal); }
+.hero-tagline {
+  font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+  color: var(--muted); font-weight: 400; max-width: 480px;
+  margin: 0 auto 36px;
+  letter-spacing: 0.01em;
+}
+.bio-pills {
+  display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;
+  margin-bottom: 56px;
+}
+.bio-pill {
+  background: rgba(0,212,170,0.1); border: 1px solid rgba(0,212,170,0.3);
+  color: var(--teal); padding: 8px 18px; border-radius: 100px;
+  font-size: 0.85rem; font-weight: 600; letter-spacing: 0.05em;
+}
+.scroll-hint {
+  position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%);
+  color: var(--muted); font-size: 0.75rem; letter-spacing: 0.1em;
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  animation: bounce 2s infinite;
+}
+.scroll-hint::after {
+  content: '↓'; font-size: 1.2rem; color: var(--teal);
+}
+@keyframes bounce {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(6px); }
+}
+
+/* ── Section headings ────────────────────────────────── */
+.section-label {
+  font-size: 0.72rem; font-weight: 700; letter-spacing: 0.18em;
+  color: var(--teal); text-transform: uppercase; margin-bottom: 12px;
+}
+.section-title {
+  font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 800;
+  letter-spacing: -0.02em; margin-bottom: 16px; color: #fff;
+}
+.section-sub {
+  color: var(--muted); font-size: 1rem; max-width: 540px;
+}
+
+/* ── KPI Numbers ─────────────────────────────────────── */
+.numbers-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 20px; margin-top: 56px;
+}
+.kpi-card {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 32px 24px;
+  text-align: center; position: relative; overflow: hidden;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.kpi-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(0,212,170,0.12);
+}
+.kpi-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0;
+  height: 3px; background: var(--teal); opacity: 0.6;
+}
+.kpi-value {
+  font-size: clamp(2.2rem, 4vw, 3rem); font-weight: 900;
+  color: var(--teal); letter-spacing: -0.03em; line-height: 1;
+  margin-bottom: 8px;
+}
+.kpi-label {
+  font-size: 0.8rem; color: var(--muted); font-weight: 600;
+  letter-spacing: 0.08em; text-transform: uppercase;
+}
+
+/* ── Sport Filter Pills ─────────────────────────────── */
+.filter-bar {
+  display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 48px;
+}
+.filter-pill {
+  padding: 10px 22px; border-radius: 100px; font-size: 0.85rem;
+  font-weight: 600; cursor: pointer; border: 1px solid var(--border);
+  background: transparent; color: var(--muted);
+  transition: all 0.2s; letter-spacing: 0.03em;
+}
+.filter-pill:hover { color: var(--text); border-color: var(--muted); }
+.filter-pill.active { background: var(--teal); border-color: var(--teal); color: #0d1b2a; }
+.filter-pill[data-sport="swimming"].active { background: var(--teal); border-color: var(--teal); }
+.filter-pill[data-sport="running"].active { background: var(--orange); border-color: var(--orange); }
+.filter-pill[data-sport="cycling"].active { background: var(--purple); border-color: var(--purple); }
+
+/* ── Sport Cards ─────────────────────────────────────── */
+.sports-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
+.sport-cards { display: flex; flex-direction: column; gap: 16px; }
+.sport-card {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 24px 28px;
+  display: flex; align-items: center; gap: 20px;
+  transition: all 0.3s;
+}
+.sport-card.dimmed { opacity: 0.3; transform: scale(0.98); }
+.sport-card.highlighted { border-color: rgba(0,212,170,0.5); }
+.sport-icon { font-size: 2rem; width: 52px; flex-shrink: 0; text-align: center; }
+.sport-meta { flex: 1; }
+.sport-name { font-size: 1rem; font-weight: 700; color: #fff; margin-bottom: 4px; }
+.sport-stats { font-size: 0.82rem; color: var(--muted); }
+.sport-stats strong { color: var(--teal); }
+.sport-count {
+  font-size: 2.2rem; font-weight: 900; letter-spacing: -0.03em;
+  color: var(--teal); text-align: right;
+}
+.sport-count small { display: block; font-size: 0.7rem; color: var(--muted); font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; }
+
+.donut-wrap { position: relative; display: flex; align-items: center; justify-content: center; }
+.donut-wrap canvas { max-width: 320px; }
+.donut-center {
+  position: absolute; text-align: center; pointer-events: none;
+}
+.donut-center .big { font-size: 2.4rem; font-weight: 900; color: var(--teal); }
+.donut-center .label { font-size: 0.7rem; color: var(--muted); font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; }
+
+/* ── Year Chart ─────────────────────────────────────── */
+.chart-wrap {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 32px; margin-top: 48px;
+}
+.chart-wrap canvas { width: 100% !important; max-height: 340px; }
+
+/* ── Hall of Records ─────────────────────────────────── */
+.records-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px; margin-top: 56px;
+}
+.record-card {
+  background: var(--card); border: 1px solid rgba(255,107,53,0.2);
+  border-radius: var(--radius); padding: 28px;
+  position: relative; overflow: hidden;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.record-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 48px rgba(255,107,53,0.15);
+}
+.record-card::after {
+  content: ''; position: absolute; top: 0; left: 0; right: 0;
+  height: 3px; background: linear-gradient(90deg, var(--orange), var(--yellow));
+}
+.record-icon { font-size: 2rem; margin-bottom: 16px; display: block; }
+.record-label {
+  font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em;
+  color: var(--orange); text-transform: uppercase; margin-bottom: 8px;
+}
+.record-value {
+  font-size: 2.2rem; font-weight: 900; color: #fff; letter-spacing: -0.03em;
+  margin-bottom: 4px; line-height: 1;
+}
+.record-date { font-size: 0.82rem; color: var(--muted); margin-bottom: 16px; }
+.record-line {
+  font-size: 0.88rem; color: rgba(232,237,242,0.7); font-style: italic;
+  border-top: 1px solid var(--border); padding-top: 14px; margin-top: 4px;
+}
+
+/* ── Timeline ────────────────────────────────────────── */
+.timeline-scroll {
+  overflow-x: auto; padding: 40px 0; margin-top: 24px;
+  scrollbar-width: thin; scrollbar-color: var(--teal) var(--panel);
+}
+.timeline-scroll::-webkit-scrollbar { height: 4px; }
+.timeline-scroll::-webkit-scrollbar-track { background: var(--panel); }
+.timeline-scroll::-webkit-scrollbar-thumb { background: var(--teal); border-radius: 2px; }
+.timeline-track {
+  display: flex; gap: 0; min-width: max-content;
+  padding: 0 40px; position: relative;
+}
+.timeline-track::before {
+  content: '';
+  position: absolute; top: 56px; left: 40px; right: 40px; height: 2px;
+  background: linear-gradient(90deg, transparent, var(--teal), var(--orange), var(--teal), transparent);
+  opacity: 0.4;
+}
+.timeline-item {
+  display: flex; flex-direction: column; align-items: center;
+  width: 200px; flex-shrink: 0; text-align: center; padding: 0 12px;
+  position: relative;
+}
+.timeline-dot {
+  width: 40px; height: 40px; border-radius: 50%;
+  background: var(--card); border: 2px solid var(--teal);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.1rem; margin-bottom: 16px; position: relative; z-index: 1;
+  transition: transform 0.2s;
+}
+.timeline-item:hover .timeline-dot { transform: scale(1.2); }
+.timeline-item.milestone .timeline-dot {
+  border-color: var(--orange);
+  box-shadow: 0 0 20px rgba(255,107,53,0.4);
+}
+.timeline-date {
+  font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em;
+  color: var(--teal); text-transform: uppercase; margin-bottom: 6px;
+}
+.timeline-event { font-size: 0.88rem; font-weight: 700; color: #fff; margin-bottom: 6px; }
+.timeline-detail { font-size: 0.75rem; color: var(--muted); line-height: 1.4; }
+
+/* ── Pool section ────────────────────────────────────── */
+.pool-section {
+  background: linear-gradient(135deg, #071a2e 0%, #0a2238 50%, #0d2a42 100%);
+  position: relative; overflow: hidden;
+}
+.pool-section::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(ellipse 100% 80% at 50% 100%, rgba(0,212,170,0.08) 0%, transparent 60%);
+}
+.pool-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; position: relative; }
+.pool-headline {
+  font-size: clamp(1.8rem, 3.5vw, 2.6rem); font-weight: 900;
+  letter-spacing: -0.02em; color: #fff; line-height: 1.2; margin-bottom: 24px;
+}
+.pool-headline span { color: var(--teal); }
+.pool-subline {
+  font-size: 1.05rem; color: var(--muted); margin-bottom: 32px; line-height: 1.7;
+}
+.pool-fact {
+  font-size: 1.1rem; color: rgba(0,212,170,0.8); font-style: italic;
+  border-left: 3px solid var(--teal); padding-left: 18px; margin-bottom: 20px;
+}
+.pool-stats { display: flex; gap: 32px; flex-wrap: wrap; }
+.pool-stat-item { text-align: center; }
+.pool-stat-num { font-size: 2.4rem; font-weight: 900; color: var(--teal); }
+.pool-stat-lbl { font-size: 0.72rem; color: var(--muted); font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; }
+
+/* ── Insights ────────────────────────────────────────── */
+.insights-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: auto auto;
+  gap: 20px; margin-top: 56px;
+}
+.insight-card {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 36px;
+  display: flex; flex-direction: column; gap: 12px;
+  transition: transform 0.2s;
+}
+.insight-card:hover { transform: translateY(-3px); }
+.insight-card:nth-child(1) { grid-column: 1; grid-row: 1; }
+.insight-card:nth-child(2) { grid-column: 2; grid-row: 1 / 3; background: linear-gradient(160deg, #1e3448 60%, #162b40 100%); }
+.insight-card:nth-child(3) { grid-column: 1; grid-row: 2; }
+.insight-card:nth-child(4) { grid-column: 1 / 3; grid-row: 3; background: var(--panel); }
+.insight-tag {
+  font-size: 0.7rem; font-weight: 700; letter-spacing: 0.15em;
+  text-transform: uppercase; color: var(--teal);
+}
+.insight-title { font-size: 1.3rem; font-weight: 800; color: #fff; letter-spacing: -0.01em; }
+.insight-body { font-size: 0.92rem; color: rgba(232,237,242,0.75); line-height: 1.75; flex: 1; }
+.insight-punch {
+  font-size: 0.88rem; font-weight: 700; color: var(--teal);
+  padding-top: 14px; border-top: 1px solid var(--border);
+  letter-spacing: 0.01em;
+}
+
+/* ── Footer ──────────────────────────────────────────── */
+footer {
+  background: #071018; padding: 40px 24px; text-align: center;
+  border-top: 1px solid var(--border);
+}
+footer p { color: var(--muted); font-size: 0.82rem; }
+footer strong { color: var(--teal); }
+
+/* ── Responsive ──────────────────────────────────────── */
+@media (max-width: 768px) {
+  .sports-layout { grid-template-columns: 1fr; }
+  .donut-wrap { display: none; }
+  .pool-layout { grid-template-columns: 1fr; gap: 32px; }
+  .insights-grid { grid-template-columns: 1fr; }
+  .insight-card:nth-child(2) { grid-column: 1; grid-row: auto; }
+  .insight-card:nth-child(4) { grid-column: 1; grid-row: auto; }
+  nav .nav-links { display: none; }
+  .numbers-grid { grid-template-columns: repeat(2, 1fr); }
+  section { padding: 56px 0; }
+}
+
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">NESI HAVER</div>
+  <div class="nav-links">
+    <a href="#numbers">Numbers</a>
+    <a href="#sports">Sports</a>
+    <a href="#records">Records</a>
+    <a href="#timeline">Timeline</a>
+    <a href="#pool">The Pool</a>
+    <a href="#insights">Insights</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-eyebrow">Garmin Activity Story · 2020 – 2026</div>
+  <h1 class="hero-name">Nesi <span>Haver</span></h1>
+  <p class="hero-tagline">Six years. 830 sessions. One constant.</p>
+  <div class="bio-pills">
+    <span class="bio-pill">Age 47</span>
+    <span class="bio-pill">180 cm</span>
+    <span class="bio-pill">70 kg</span>
+    <span class="bio-pill">Since May 2020</span>
+  </div>
+  <div class="scroll-hint">SCROLL</div>
+</section>
+
+<!-- NUMBERS -->
+<section id="numbers">
+  <div class="container">
+    <div class="section-label">The Numbers</div>
+    <h2 class="section-title">Six years in figures</h2>
+    <p class="section-sub">Every session tracked. Every kilometre counted. Here is what it adds up to.</p>
+    <div class="numbers-grid">
+      <div class="kpi-card">
+        <div class="kpi-value"><span class="count-up" data-target="830">0</span></div>
+        <div class="kpi-label">Total Sessions</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-value"><span class="count-up" data-target="585.7">0</span></div>
+        <div class="kpi-label">Hours of Sport</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-value"><span class="count-up" data-target="3058.7">0</span></div>
+        <div class="kpi-label">Kilometres</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-value"><span class="count-up" data-target="352593" data-opts='{"suffix":"k"}'>0</span>k</div>
+        <div class="kpi-label">Calories Burned</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-value"><span class="count-up" data-target="6">0</span></div>
+        <div class="kpi-label">Years</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SPORTS -->
+<section id="sports">
+  <div class="container">
+    <div class="section-label">Your Sports</div>
+    <h2 class="section-title">Where the time goes</h2>
+    <p class="section-sub">Three sports. One dominant. Use the filter to focus on any one of them.</p>
+
+    <div class="filter-bar" style="margin-top:32px;">
+      <button class="filter-pill active" data-sport="all">All Sports</button>
+      <button class="filter-pill" data-sport="swimming">Swimming</button>
+      <button class="filter-pill" data-sport="running">Running</button>
+      <button class="filter-pill" data-sport="cycling">Cycling</button>
+    </div>
+
+    <div class="sports-layout">
+      <div class="donut-wrap">
+        <canvas id="donutChart" width="320" height="320"></canvas>
+        <div class="donut-center">
+          <div class="big">62%</div>
+          <div class="label">Swimming</div>
+        </div>
+      </div>
+      <div class="sport-cards">
+        <div class="sport-card" data-sport="swimming">
+          <div class="sport-icon">🏊</div>
+          <div class="sport-meta">
+            <div class="sport-name">Swimming</div>
+            <div class="sport-stats"><strong>850.9 km</strong> · 334.8 hours in the pool</div>
+          </div>
+          <div class="sport-count">511<small>sessions</small></div>
+        </div>
+        <div class="sport-card" data-sport="running">
+          <div class="sport-icon">🏃</div>
+          <div class="sport-meta">
+            <div class="sport-name">Running</div>
+            <div class="sport-stats"><strong>1009.9 km</strong> · 122.7 hours on foot</div>
+          </div>
+          <div class="sport-count">215<small>sessions</small></div>
+        </div>
+        <div class="sport-card" data-sport="cycling">
+          <div class="sport-icon">🚴</div>
+          <div class="sport-meta">
+            <div class="sport-name">Cycling</div>
+            <div class="sport-stats"><strong>1170.2 km</strong> · 10% of sessions</div>
+          </div>
+          <div class="sport-count">82<small>sessions</small></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- YEAR BY YEAR -->
+<section id="year-chart">
+  <div class="container">
+    <div class="section-label">Year by Year</div>
+    <h2 class="section-title">The arc from 2020 to now</h2>
+    <p class="section-sub">Started mid-pandemic. Built the habit. Never dropped below 100 sessions in a full year.</p>
+    <div class="chart-wrap">
+      <canvas id="yearChart"></canvas>
+    </div>
+  </div>
+</section>
+
+<!-- RECORDS -->
+<section id="records">
+  <div class="container">
+    <div class="section-label">Hall of Records</div>
+    <h2 class="section-title">Personal bests — with dates</h2>
+    <p class="section-sub">These are the sessions that pushed furthest, fastest, longest. Each one has a timestamp.</p>
+    <div class="records-grid">
+
+      <div class="record-card">
+        <span class="record-icon">🏊</span>
+        <div class="record-label">Longest Swim</div>
+        <div class="record-value">2.5 km</div>
+        <div class="record-date">Oct 03, 2025</div>
+        <div class="record-line">The day the pool had no end.</div>
+      </div>
+
+      <div class="record-card">
+        <span class="record-icon">🏆</span>
+        <div class="record-label">Most Active Year</div>
+        <div class="record-value">152 sessions</div>
+        <div class="record-date">2021</div>
+        <div class="record-line">One full year. No gaps.</div>
+      </div>
+
+      <div class="record-card">
+        <span class="record-icon">🏃</span>
+        <div class="record-label">Longest Run</div>
+        <div class="record-value">12.3 km</div>
+        <div class="record-date">Dec 20, 2025</div>
+        <div class="record-line">Feet on pavement. No excuses.</div>
+      </div>
+
+      <div class="record-card">
+        <span class="record-icon">🚴</span>
+        <div class="record-label">Longest Ride</div>
+        <div class="record-value">63.53 km</div>
+        <div class="record-date">Nov 12, 2022</div>
+        <div class="record-line">Sixty-three kilometres. One afternoon.</div>
+      </div>
+
+      <div class="record-card">
+        <span class="record-icon">⚡</span>
+        <div class="record-label">Best Run Pace</div>
+        <div class="record-value">5:01 /km</div>
+        <div class="record-date">Mar 17, 2026</div>
+        <div class="record-line">Five minutes. One kilometre. Full send.</div>
+      </div>
+
+      <div class="record-card">
+        <span class="record-icon">🌊</span>
+        <div class="record-label">Total Pool Time</div>
+        <div class="record-value">334.8 hours</div>
+        <div class="record-date">2020 – 2026</div>
+        <div class="record-line">14.0 full days. Back and forth. Lane after lane.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TIMELINE -->
+<section id="timeline">
+  <div class="container">
+    <div class="section-label">Journey</div>
+    <h2 class="section-title">The milestones, in order</h2>
+    <p class="section-sub">From the first treadmill session in lockdown to the pace record in 2026. Scroll to see the full arc.</p>
+  </div>
+  <div class="timeline-scroll">
+    <div class="timeline-track">
+
+      <div class="timeline-item">
+        <div class="timeline-dot">🏃</div>
+        <div class="timeline-date">May 2020</div>
+        <div class="timeline-event">First session</div>
+        <div class="timeline-detail">Indoor treadmill run. Gyms closed. Garmin on wrist.</div>
+      </div>
+
+      <div class="timeline-item milestone">
+        <div class="timeline-dot">🏊</div>
+        <div class="timeline-date">2021</div>
+        <div class="timeline-event">The water calls</div>
+        <div class="timeline-detail">152 sessions in one year. Swimming becomes the constant.</div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot">🚴</div>
+        <div class="timeline-date">Nov 2022</div>
+        <div class="timeline-event">Epic ride</div>
+        <div class="timeline-detail">63.5 km on the bike. A different kind of endurance.</div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot">📅</div>
+        <div class="timeline-date">2023</div>
+        <div class="timeline-event">Steady hands</div>
+        <div class="timeline-detail">115 sessions. Quieter year. Never stopped.</div>
+      </div>
+
+      <div class="timeline-item milestone">
+        <div class="timeline-dot">🥇</div>
+        <div class="timeline-date">Oct 2025</div>
+        <div class="timeline-event">Swim PR — 2.50 km</div>
+        <div class="timeline-detail">A single pool session. The longest yet.</div>
+      </div>
+
+      <div class="timeline-item milestone">
+        <div class="timeline-dot">🥇</div>
+        <div class="timeline-date">Dec 2025</div>
+        <div class="timeline-event">Run PR — 12.3 km</div>
+        <div class="timeline-detail">Longest run on record. Five years into the habit.</div>
+      </div>
+
+      <div class="timeline-item milestone">
+        <div class="timeline-dot">⚡</div>
+        <div class="timeline-date">Mar 2026</div>
+        <div class="timeline-event">Pace PR — 5:01 /km</div>
+        <div class="timeline-detail">Fastest pace yet. Year six. Still accelerating.</div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot">🏁</div>
+        <div class="timeline-date">Apr 2026</div>
+        <div class="timeline-event">830 sessions</div>
+        <div class="timeline-detail">The streak is not a project. It is just life now.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- POOL -->
+<section id="pool" class="pool-section">
+  <div class="container">
+    <div class="pool-layout">
+      <div>
+        <div class="section-label">The Pool</div>
+        <h2 class="pool-headline"><span>511 sessions.</span><br>850.9 km of water.</h2>
+        <p class="pool-subline">
+          62 percent of every workout happened in a 25-metre lane.
+          Not at a race. Not in open water. In a pool, back and forth,
+          turning at the wall, counting laps.
+        </p>
+        <div class="pool-fact">
+          850 km in the pool. That is Madrid to Paris — one lane, both ways.
+        </div>
+        <div class="pool-stats">
+          <div class="pool-stat-item">
+            <div class="pool-stat-num">334.8</div>
+            <div class="pool-stat-lbl">Hours in pool</div>
+          </div>
+          <div class="pool-stat-item">
+            <div class="pool-stat-num">14.0</div>
+            <div class="pool-stat-lbl">Full days underwater</div>
+          </div>
+          <div class="pool-stat-item">
+            <div class="pool-stat-num">1665m</div>
+            <div class="pool-stat-lbl">Avg per session</div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="chart-wrap" style="margin-top:0">
+          <div class="section-label" style="margin-bottom:16px;">Swimming sessions per year</div>
+          <canvas id="swimYearChart"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INSIGHTS -->
+<section id="insights">
+  <div class="container">
+    <div class="section-label">Insights</div>
+    <h2 class="section-title">What the data says</h2>
+    <p class="section-sub">Not averages. Not trends. The story behind the numbers.</p>
+    <div class="insights-grid">
+
+      <div class="insight-card">
+        <div class="insight-tag">Origin</div>
+        <div class="insight-title">Born in a lockdown</div>
+        <div class="insight-body">Training started in May 2020, when gyms closed and the street was the only option. Indoor running, a Garmin on the wrist, nothing else to measure. The lockdown ended. The streak did not.</div>
+        <div class="insight-punch">Six years from that first session — still going.</div>
+      </div>
+
+      <div class="insight-card">
+        <div class="insight-tag">Identity</div>
+        <div class="insight-title">The swimmer</div>
+        <div class="insight-body">Of 830 recorded sessions, 511 happened in a pool. That is 62 percent. Swimming is not a secondary sport — it is the backbone of the whole thing. Running fills the outdoor days. Cycling adds the distance. But the pool is where it all starts each week.<br><br>850 kilometres covered in 25-metre lanes. That is the width of France, end to end, in chlorinated water.</div>
+        <div class="insight-punch">Nothing else comes close.</div>
+      </div>
+
+      <div class="insight-card">
+        <div class="insight-tag">Peak</div>
+        <div class="insight-title">2021 — the year it clicked</div>
+        <div class="insight-body">The first full calendar year brought 152 sessions — almost once every two days, for twelve months straight. That was not an accident. 2021 was the year the habit became automatic. Every year since has used it as the reference point.</div>
+        <div class="insight-punch">152 is still the number to beat.</div>
+      </div>
+
+      <div class="insight-card">
+        <div class="insight-tag">Still Moving</div>
+        <div class="insight-title">Year six, no signs of slowing</div>
+        <div class="insight-body">2026 is 39 sessions old through April. The pace PR came in March. The longer runs started in December. At 47, the body is logging personal bests — not in spite of the years of training, but because of them. Consistency compounds differently than intensity.</div>
+        <div class="insight-punch">The best records in this dataset are from the last six months.</div>
+      </div>
+    
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>830 sessions · 585 hours · 3,059 km · <strong>Nesi Haver</strong> · 2020 – 2026</p>
+</footer>
+
+<script>
+const DATA = {
+  "yearChart": {
+    "labels": [
+      "2020",
+      "2021",
+      "2022",
+      "2023",
+      "2024",
+      "2025",
+      "2026"
+    ],
+    "datasets": [
+      {
+        "label": "Swimming",
+        "data": [
+          36,
+          85,
+          98,
+          93,
+          88,
+          84,
+          27
+        ],
+        "backgroundColor": "#00D4AA"
+      },
+      {
+        "label": "Running",
+        "data": [
+          42,
+          37,
+          24,
+          12,
+          52,
+          38,
+          10
+        ],
+        "backgroundColor": "#FF6B35"
+      },
+      {
+        "label": "Cycling",
+        "data": [
+          6,
+          26,
+          23,
+          10,
+          6,
+          9,
+          2
+        ],
+        "backgroundColor": "#7B61FF"
+      },
+      {
+        "label": "Other",
+        "data": [
+          4,
+          4,
+          1,
+          0,
+          3,
+          10,
+          0
+        ],
+        "backgroundColor": "#FFD166"
+      }
+    ]
+  },
+  "donut": {
+    "labels": [
+      "Swimming",
+      "Running",
+      "Cycling",
+      "Other"
+    ],
+    "data": [
+      511,
+      215,
+      82,
+      22
+    ],
+    "colors": [
+      "#00D4AA",
+      "#FF6B35",
+      "#7B61FF",
+      "#FFD166"
+    ]
+  }
+};
+
+// Swim-by-year mini chart
+document.addEventListener('DOMContentLoaded', () => {
+  const swimYearCtx = document.getElementById('swimYearChart');
+  if (swimYearCtx) {
+    new Chart(swimYearCtx, {
+      type: 'bar',
+      data: {
+        labels: DATA.yearChart.labels,
+        datasets: [{
+          label: 'Swim sessions',
+          data: DATA.yearChart.datasets[0].data,
+          backgroundColor: 'rgba(0,212,170,0.7)',
+          borderRadius: 6,
+          borderSkipped: false,
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            backgroundColor: '#1e3448',
+            borderColor: 'rgba(0,212,170,0.3)',
+            borderWidth: 1,
+            titleColor: '#e8edf2',
+            bodyColor: '#6b8fa8',
+          }
+        },
+        scales: {
+          x: { grid: { display: false }, ticks: { color: '#6b8fa8', font: { weight: '600' } } },
+          y: { grid: { color: 'rgba(107,143,168,0.1)' }, ticks: { color: '#6b8fa8' } }
+        }
+      }
+    });
+  }
+});
+
+
+document.addEventListener('DOMContentLoaded', () => {
+
+  // ── Count-up animation ─────────────────────────────
+  const formatNum = (n, opts = {}) => {
+    if (opts.suffix === 'k') return (n / 1000).toFixed(0) + 'k';
+    if (Number.isInteger(n)) return n.toLocaleString();
+    return n.toFixed(1).toLocaleString();
+  };
+
+  const animateCounter = (el, target, opts = {}) => {
+    const duration = 1800;
+    const start = performance.now();
+    const update = (now) => {
+      const p = Math.min((now - start) / duration, 1);
+      const ease = 1 - Math.pow(1 - p, 3);
+      el.textContent = formatNum(target * ease, opts);
+      if (p < 1) requestAnimationFrame(update);
+      else el.textContent = formatNum(target, opts);
+    };
+    requestAnimationFrame(update);
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      const el = e.target;
+      const target = parseFloat(el.dataset.target);
+      const opts = el.dataset.opts ? JSON.parse(el.dataset.opts) : {};
+      animateCounter(el, target, opts);
+      observer.unobserve(el);
+    });
+  }, { threshold: 0.3 });
+
+  document.querySelectorAll('.count-up').forEach(el => observer.observe(el));
+
+  // ── Donut Chart ────────────────────────────────────
+  const donutCtx = document.getElementById('donutChart');
+  if (donutCtx) {
+    const d = DATA.donut;
+    new Chart(donutCtx, {
+      type: 'doughnut',
+      data: {
+        labels: d.labels,
+        datasets: [{
+          data: d.data,
+          backgroundColor: d.colors,
+          borderWidth: 3,
+          borderColor: '#152637',
+          hoverOffset: 8,
+        }]
+      },
+      options: {
+        cutout: '72%',
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            callbacks: {
+              label: (ctx) => ` ${ctx.label}: ${ctx.parsed} sessions (${Math.round(ctx.parsed/d.data.reduce((a,b)=>a+b,0)*100)}%)`
+            }
+          }
+        }
+      }
+    });
+  }
+
+  // ── Year Chart ─────────────────────────────────────
+  let yearChart = null;
+  const yearCtx = document.getElementById('yearChart');
+  if (yearCtx) {
+    const yc = DATA.yearChart;
+    yearChart = new Chart(yearCtx, {
+      type: 'bar',
+      data: {
+        labels: yc.labels,
+        datasets: yc.datasets.map(ds => ({
+          ...ds,
+          borderRadius: 6,
+          borderSkipped: false,
+        }))
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: true,
+        interaction: { mode: 'index' },
+        plugins: {
+          legend: {
+            position: 'top',
+            labels: { color: '#6b8fa8', font: { size: 12, weight: '600' }, boxWidth: 12, padding: 20 }
+          },
+          tooltip: {
+            backgroundColor: '#1e3448',
+            borderColor: 'rgba(0,212,170,0.3)',
+            borderWidth: 1,
+            titleColor: '#e8edf2',
+            bodyColor: '#6b8fa8',
+            padding: 12,
+          }
+        },
+        scales: {
+          x: {
+            stacked: true,
+            grid: { display: false },
+            ticks: { color: '#6b8fa8', font: { weight: '600' } }
+          },
+          y: {
+            stacked: true,
+            grid: { color: 'rgba(107,143,168,0.1)' },
+            ticks: { color: '#6b8fa8' }
+          }
+        }
+      }
+    });
+  }
+
+  // ── Sport Filter ───────────────────────────────────
+  const pills = document.querySelectorAll('.filter-pill');
+  const sportCards = document.querySelectorAll('.sport-card');
+
+  const sportColors = {
+    swimming: '#00D4AA',
+    running: '#FF6B35',
+    cycling: '#7B61FF',
+  };
+
+  pills.forEach(pill => {
+    pill.addEventListener('click', () => {
+      const sport = pill.dataset.sport;
+
+      pills.forEach(p => p.classList.remove('active'));
+      pill.classList.add('active');
+
+      sportCards.forEach(card => {
+        const s = card.dataset.sport;
+        if (sport === 'all' || s === sport) {
+          card.classList.remove('dimmed');
+          card.classList.add('highlighted');
+        } else {
+          card.classList.add('dimmed');
+          card.classList.remove('highlighted');
+        }
+      });
+
+      // Update year chart to highlight selected sport
+      if (yearChart && sport !== 'all') {
+        yearChart.data.datasets.forEach(ds => {
+          ds.backgroundColor = ds.label.toLowerCase() === sport
+            ? sportColors[sport]
+            : 'rgba(107,143,168,0.2)';
+        });
+      } else if (yearChart) {
+        const yc = DATA.yearChart;
+        yearChart.data.datasets.forEach((ds, i) => {
+          ds.backgroundColor = yc.datasets[i].backgroundColor;
+        });
+      }
+      if (yearChart) yearChart.update('active');
+    });
+  });
+
+});
+
+</script>
+</body>
+</html>
