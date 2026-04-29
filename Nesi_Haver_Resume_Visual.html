@@ -37,26 +37,29 @@
     }
 
     .header h1 {
-      font-size: 2.6rem;
+      font-size: 3.38rem;
       font-weight: 700;
       letter-spacing: 0.04em;
       text-transform: uppercase;
       margin-bottom: 6px;
+      text-align: center;
     }
 
     .header .title {
-      font-size: 1.1rem;
+      font-size: 1.43rem;
       color: rgba(255, 255, 255, 0.88);
       letter-spacing: 0.06em;
       margin-bottom: 22px;
+      text-align: center;
     }
 
     .header .contact {
       display: flex;
       flex-wrap: wrap;
       gap: 8px 20px;
-      font-size: 0.85rem;
+      font-size: 1.1rem;
       color: rgba(255, 255, 255, 0.80);
+      justify-content: center;
     }
 
     .header .contact a {
@@ -83,10 +86,11 @@
       padding: 20px;
       border-radius: 0 6px 6px 0;
       margin-bottom: 40px;
+      text-align: center;
     }
 
     .summary-title {
-      font-size: 0.72rem;
+      font-size: 0.94rem;
       font-weight: 700;
       letter-spacing: 0.14em;
       text-transform: uppercase;
@@ -95,14 +99,14 @@
     }
 
     .summary-text {
-      font-size: 0.96rem;
+      font-size: 1.25rem;
       color: #3a4a5c;
       line-height: 1.75;
       margin-bottom: 12px;
     }
 
     .summary-creds {
-      font-size: 0.84rem;
+      font-size: 1.09rem;
       font-weight: 600;
       color: #92400E;
       letter-spacing: 0.04em;
@@ -116,7 +120,7 @@
     }
 
     .timeline-label {
-      font-size: 0.72rem;
+      font-size: 0.94rem;
       font-weight: 700;
       letter-spacing: 0.14em;
       text-transform: uppercase;
@@ -142,7 +146,7 @@
 
     .timeline-item {
       position: relative;
-      margin-bottom: 30px;
+      margin-bottom: 40px;
       padding-left: 100px;
     }
 
@@ -158,12 +162,12 @@
 
     .timeline-year {
       position: absolute;
-      left: -110px;
+      left: -140px;
       top: 2px;
-      font-size: 0.78rem;
+      font-size: 1.01rem;
       font-weight: 600;
       text-align: center;
-      width: 45px;
+      width: 70px;
     }
 
     .timeline-connector {
@@ -183,7 +187,7 @@
     }
 
     .company-name {
-      font-size: 0.78rem;
+      font-size: 1.01rem;
       font-weight: 700;
       letter-spacing: 0.1em;
       text-transform: uppercase;
@@ -192,7 +196,7 @@
 
     .role-title {
       font-weight: 600;
-      font-size: 0.94rem;
+      font-size: 1.22rem;
       margin-bottom: 12px;
       display: flex;
       justify-content: space-between;
@@ -201,10 +205,22 @@
     }
 
     .role-dates {
-      font-size: 0.80rem;
+      font-size: 1.04rem;
       color: #718096;
       font-style: italic;
       white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .duration-badge {
+      display: inline-block;
+      background: rgba(46, 93, 155, 0.08);
+      color: #2E5D9B;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 0.95rem;
+      font-weight: 500;
+      margin-left: 12px;
     }
 
     .bullets {
@@ -216,8 +232,8 @@
     .bullets li {
       position: relative;
       padding-left: 18px;
-      margin-bottom: 8px;
-      font-size: 0.88rem;
+      margin-bottom: 10px;
+      font-size: 1.14rem;
       color: #4a5568;
       line-height: 1.62;
     }
@@ -274,7 +290,7 @@
     }
 
     .section-title {
-      font-size: 0.72rem;
+      font-size: 0.94rem;
       font-weight: 700;
       letter-spacing: 0.14em;
       text-transform: uppercase;
@@ -303,13 +319,13 @@
     }
 
     .section-content {
-      font-size: 0.88rem;
+      font-size: 1.14rem;
       color: #4a5568;
       line-height: 1.7;
     }
 
     .section-content li {
-      margin-bottom: 8px;
+      margin-bottom: 10px;
     }
 
     /* LANGUAGES */
@@ -317,7 +333,7 @@
       margin-top: 40px;
       padding-top: 20px;
       border-top: 1px solid #e2e8f0;
-      font-size: 0.88rem;
+      font-size: 1.14rem;
       color: #64748B;
     }
 
@@ -325,8 +341,8 @@
     .footer {
       background: #f7faff;
       border-top: 1px solid #e2e8f0;
-      padding: 14px 52px;
-      font-size: 0.75rem;
+      padding: 18px 52px;
+      font-size: 0.98rem;
       color: #a0aec0;
       text-align: center;
     }
@@ -339,12 +355,12 @@
 
     .navigation a {
       display: inline-block;
-      padding: 10px 20px;
+      padding: 12px 24px;
       background: #2E5D9B;
       color: white;
       text-decoration: none;
       border-radius: 6px;
-      font-size: 14px;
+      font-size: 1.04rem;
       margin: 0 5px;
       transition: background 0.2s;
     }
@@ -354,14 +370,14 @@
     }
 
     @media (max-width: 768px) {
-      .header h1 { font-size: 1.9rem; }
+      .header h1 { font-size: 2.6rem; }
       .header { padding: 32px 24px 24px; }
       .content { padding: 28px 24px 36px; }
       .two-column { grid-template-columns: 1fr; }
       .role-title { flex-direction: column; gap: 4px; }
       .timeline-item { padding-left: 60px; }
       .timeline-dot { left: -50px; }
-      .timeline-year { left: -90px; width: 40px; }
+      .timeline-year { left: -110px; width: 60px; font-size: 0.9rem; }
       .timeline-connector { left: -50px; }
     }
   </style>
@@ -399,12 +415,12 @@
           <!-- COGNYTE -->
           <div class="timeline-item cognyte">
             <div class="timeline-dot"></div>
-            <div class="timeline-year">2022</div>
+            <div class="timeline-year">2020-Present</div>
             <div class="timeline-connector"></div>
             <div class="company-card">
               <div class="company-name">Cognyte</div>
               <div class="role-title">
-                <span><strong>Product Delivery Manager (R&D)</strong></span>
+                <span><strong>Product Delivery Manager (R&D)</strong><span class="duration-badge">2 yrs</span></span>
                 <span class="role-dates">July 2022 - Present</span>
               </div>
               <ul class="bullets">
@@ -415,7 +431,7 @@
               </ul>
               <div style="margin-top: 16px;">
                 <div class="role-title">
-                  <span><strong>Project Delivery Manager & Product Champion - Tactical Intelligence (GCO)</strong></span>
+                  <span><strong>Project Delivery Manager & Product Champion - Tactical Intelligence (GCO)</strong><span class="duration-badge">2 yrs</span></span>
                   <span class="role-dates">July 2020 - June 2022</span>
                 </div>
                 <ul class="bullets">
@@ -429,12 +445,12 @@
           <!-- IMDSOFT -->
           <div class="timeline-item imdsoft">
             <div class="timeline-dot"></div>
-            <div class="timeline-year">2016</div>
+            <div class="timeline-year">2016-2020</div>
             <div class="timeline-connector"></div>
             <div class="company-card">
               <div class="company-name">iMDsoft (Healthcare)</div>
               <div class="role-title">
-                <span><strong>Project Manager</strong></span>
+                <span><strong>Project Manager</strong><span class="duration-badge">3.8 yrs</span></span>
                 <span class="role-dates">October 2016 - June 2020</span>
               </div>
               <ul class="bullets">
@@ -447,12 +463,12 @@
           <!-- STARHOME -->
           <div class="timeline-item starhome">
             <div class="timeline-dot"></div>
-            <div class="timeline-year">2011</div>
+            <div class="timeline-year">2011-2016</div>
             <div class="timeline-connector"></div>
             <div class="company-card">
               <div class="company-name">Starhome</div>
               <div class="role-title">
-                <span><strong>Project Manager</strong></span>
+                <span><strong>Project Manager</strong><span class="duration-badge">2.7 yrs</span></span>
                 <span class="role-dates">January 2014 - September 2016</span>
               </div>
               <ul class="bullets">
@@ -460,7 +476,7 @@
               </ul>
               <div style="margin-top: 16px;">
                 <div class="role-title">
-                  <span><strong>Product Expert</strong></span>
+                  <span><strong>Product Expert</strong><span class="duration-badge">3 yrs</span></span>
                   <span class="role-dates">January 2011 - December 2013</span>
                 </div>
                 <ul class="bullets">
@@ -473,12 +489,12 @@
           <!-- COMVERSE -->
           <div class="timeline-item comverse">
             <div class="timeline-dot"></div>
-            <div class="timeline-year">2006</div>
+            <div class="timeline-year">2006-2010</div>
             <div class="timeline-connector"></div>
             <div class="company-card">
               <div class="company-name">Comverse</div>
               <div class="role-title">
-                <span><strong>Senior Customer Support Engineer & Project Engineer</strong></span>
+                <span><strong>Senior Customer Support Engineer & Project Engineer</strong><span class="duration-badge">5 yrs</span></span>
                 <span class="role-dates">January 2006 - December 2010</span>
               </div>
               <ul class="bullets">
