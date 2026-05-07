@@ -133,9 +133,9 @@
     .timeline-line {
       position: absolute;
       left: 100px;
-      top: 50px;
+      top: 80px;
       width: 3px;
-      height: 100%;
+      height: calc(100% - 100px);
       background: #CBD5E1;
     }
 
@@ -152,7 +152,7 @@
 
     .timeline-dot {
       position: absolute;
-      left: 0px;
+      left: -12px;
       top: 0;
       width: 24px;
       height: 24px;
@@ -376,10 +376,10 @@
       .content { padding: 28px 24px 36px; }
       .two-column { grid-template-columns: 1fr; }
       .role-title { flex-direction: column; gap: 4px; }
-      .timeline-line { left: 80px; }
+      .timeline-line { left: 80px; top: 80px; height: calc(100% - 100px); }
       .timeline-items { padding-left: 80px; }
       .timeline-item { padding-left: 25px; }
-      .timeline-dot { left: 0px; }
+      .timeline-dot { left: -12px; }
       .timeline-year { left: -130px; width: 100px; font-size: 0.9rem; text-align: right; padding-right: 8px; }
       .timeline-connector { left: 0px; width: 0px; }
     }
@@ -423,7 +423,7 @@
             <div class="company-card">
               <div class="company-name">Cognyte</div>
               <div class="role-title">
-                <span><strong>Product Delivery Manager (R&D)</strong><span class="duration-badge">2 yrs</span></span>
+                <span><strong>Product Delivery Manager (R&D)</strong><span class="duration-badge">4 yrs</span></span>
                 <span class="role-dates">July 2022 - Present</span>
               </div>
               <ul class="bullets">
