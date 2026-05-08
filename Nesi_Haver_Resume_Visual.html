@@ -371,17 +371,45 @@
     }
 
     @media (max-width: 768px) {
-      .header h1 { font-size: 2.6rem; }
-      .header { padding: 32px 24px 24px; }
-      .content { padding: 28px 24px 36px; }
-      .two-column { grid-template-columns: 1fr; }
-      .role-title { flex-direction: column; gap: 4px; }
-      .timeline-line { left: 80px; top: 80px; height: calc(100% - 100px); }
-      .timeline-items { padding-left: 80px; }
-      .timeline-item { padding-left: 25px; }
-      .timeline-dot { left: -12px; }
-      .timeline-year { left: -130px; width: 100px; font-size: 0.9rem; text-align: right; padding-right: 8px; }
-      .timeline-connector { left: 0px; width: 0px; }
+      body { font-size: 14px; }
+      .header { padding: 24px 16px 20px; }
+      .header h1 { font-size: 2rem; }
+      .header .title { font-size: 1.1rem; margin-bottom: 12px; }
+      .header .contact { font-size: 0.95rem; gap: 6px 12px; }
+      .content { padding: 20px 16px 28px; }
+
+      .summary-section { padding: 16px; margin-bottom: 28px; }
+      .summary-title { font-size: 0.85rem; margin-bottom: 10px; }
+      .summary-text { font-size: 1.05rem; line-height: 1.6; margin-bottom: 8px; }
+      .summary-creds { font-size: 0.95rem; }
+
+      .timeline-section { margin-top: 30px; }
+      .timeline-label { font-size: 0.85rem; margin-bottom: 20px; }
+      .timeline-items { padding-left: 70px; }
+      .timeline-item { margin-bottom: 30px; padding-left: 20px; }
+      .timeline-dot { left: -10px; width: 20px; height: 20px; }
+      .timeline-line { left: 70px; top: 60px; width: 2px; height: calc(100% - 100px); }
+      .timeline-year { left: -95px; width: 80px; font-size: 0.85rem; padding-right: 6px; }
+
+      .company-card { padding: 16px; }
+      .company-name { font-size: 0.95rem; margin-bottom: 10px; }
+      .role-title { font-size: 1rem; margin-bottom: 10px; flex-direction: column; gap: 3px; }
+      .role-dates { font-size: 0.9rem; }
+      .duration-badge { font-size: 0.85rem; padding: 2px 6px; }
+
+      .bullets li { font-size: 0.95rem; padding-left: 15px; margin-bottom: 8px; line-height: 1.5; }
+
+      .two-column { grid-template-columns: 1fr; gap: 16px; margin-top: 28px; }
+      .section-box { padding: 16px; }
+      .section-title { font-size: 0.85rem; margin-bottom: 12px; }
+      .section-content { font-size: 0.95rem; line-height: 1.6; }
+
+      .languages { font-size: 0.95rem; margin-top: 28px; padding-top: 16px; }
+
+      .navigation { padding: 16px 0; margin-top: 16px; }
+      .navigation a { padding: 10px 16px; font-size: 0.95rem; margin: 0 4px; }
+
+      .footer { padding: 14px 16px; font-size: 0.9rem; }
     }
   </style>
 </head>
