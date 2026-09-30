@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nesi Haver - Product Strategist</title>
+    <style>
+        :root {
+            --bg-primary: #FAFAF8;
+            --bg-secondary: #FFFFFF;
+            --text-primary: #1A1A18;
+            --text-secondary: #666666;
+            --text-tertiary: #999999;
+            --border: rgba(26, 26, 24, 0.08);
+            --accent: #1A1A18;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root:not([data-theme="light"]) {
+                --bg-primary: #0F0F0E;
+                --bg-secondary: #1A1A18;
+                --text-primary: #F5F5F3;
+                --text-secondary: #CCCCCC;
+                --text-tertiary: #999999;
+                --border: rgba(245, 245, 243, 0.08);
+            }
+        }
+
+        :root[data-theme="dark"] {
+            --bg-primary: #0F0F0E;
+            --bg-secondary: #1A1A18;
+            --text-primary: #F5F5F3;
+            --text-secondary: #CCCCCC;
+            --text-tertiary: #999999;
+            --border: rgba(245, 245, 243, 0.08);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            letter-spacing: 0.3px;
+        }
+
+        header {
+            padding: 48px 40px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--bg-secondary);
+        }
+
+        .logo {
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+
+        nav {
+            display: flex;
+            gap: 32px;
+            font-size: 13px;
+        }
+
+        nav a {
+            color: var(--text-primary);
+            text-decoration: none;
+            transition: opacity 0.3s ease;
+        }
+
+        nav a:hover { opacity: 0.6; }
+
+        .hero {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 80px 40px;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: start;
+        }
+
+        .photo-section {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .photo-frame {
+            width: 280px;
+            height: 280px;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 40px;
+            box-shadow: 0 4px 20px rgba(26, 26, 24, 0.08);
+        }
+
+        .photo-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .positioning {
+            margin-bottom: 40px;
+        }
+
+        .label {
+            font-size: 12px;
+            color: var(--text-tertiary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .positioning p {
+            font-size: 16px;
+            color: var(--text-primary);
+            margin: 0;
+            font-weight: 500;
+            line-height: 1.6;
+        }
+
+        .divider {
+            border-top: 1px solid var(--border);
+            padding-top: 24px;
+            margin-top: 24px;
+        }
+
+        .location {
+            font-size: 14px;
+            color: var(--text-primary);
+            margin: 0;
+        }
+
+        .cta-section {
+            padding-top: 20px;
+        }
+
+        h1 {
+            font-family: 'Georgia', 'Garamond', serif;
+            font-size: 48px;
+            font-weight: 600;
+            line-height: 1.2;
+            color: var(--text-primary);
+            margin: 0 0 24px 0;
+            letter-spacing: -0.5px;
+        }
+
+        .intro-text {
+            font-size: 16px;
+            color: var(--text-secondary);
+            margin: 0 0 48px 0;
+            line-height: 1.8;
+        }
+
+        .btn-primary {
+            width: 100%;
+            padding: 16px 32px;
+            border-radius: 6px;
+            border: none;
+            background: var(--accent);
+            color: #FFFFFF;
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            margin-bottom: 16px;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            box-shadow: 0 4px 12px rgba(26, 26, 24, 0.12);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(26, 26, 24, 0.16);
+        }
+
+        .response-time {
+            font-size: 12px;
+            color: var(--text-tertiary);
+            margin: 0 0 32px 0;
+        }
+
+        .btn-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 28px;
+        }
+
+        .btn-secondary {
+            padding: 13px 20px;
+            border-radius: 6px;
+            border: 1px solid var(--border);
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            background: var(--bg-primary);
+            border-color: var(--text-primary);
+        }
+
+        .link-row {
+            display: flex;
+            gap: 24px;
+            font-size: 12px;
+        }
+
+        .link-row a {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: opacity 0.3s ease;
+        }
+
+        .link-row a:hover { opacity: 0.6; }
+
+        .featured {
+            padding: 80px 40px;
+            border-top: 1px solid var(--border);
+            background: var(--bg-secondary);
+        }
+
+        .section-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            margin-bottom: 60px;
+        }
+
+        .section-header h2 {
+            font-family: 'Georgia', 'Garamond', serif;
+            font-size: 28px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin: 0 0 12px 0;
+            letter-spacing: -0.3px;
+        }
+
+        .section-header p {
+            font-size: 14px;
+            color: var(--text-tertiary);
+            margin: 0;
+        }
+
+        .outcome-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        .outcome-card {
+            padding: 32px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            background: var(--bg-primary);
+            transition: all 0.3s ease;
+        }
+
+        .outcome-card:hover {
+            border-color: var(--text-primary);
+            box-shadow: 0 2px 10px rgba(26, 26, 24, 0.04);
+        }
+
+        .outcome-card h3 {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin: 0 0 16px 0;
+        }
+
+        .outcome-card p {
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin: 0;
+            line-height: 1.7;
+        }
+
+        .background {
+            padding: 80px 40px;
+            background: var(--bg-primary);
+        }
+
+        .timeline {
+            border-left: 1px solid var(--border);
+            padding-left: 32px;
+        }
+
+        .timeline-item {
+            margin-bottom: 48px;
+        }
+
+        .timeline-item .label {
+            margin-bottom: 4px;
+        }
+
+        .timeline-item p {
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin: 0;
+        }
+
+        .cv-section {
+            padding: 80px 40px;
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border);
+        }
+
+        .cv-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .cv-toggle {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 40px;
+        }
+
+        .tab-btn {
+            padding: 10px 20px;
+            border-radius: 6px;
+            border: 1px solid var(--border);
+            background: transparent;
+            color: var(--text-primary);
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .tab-btn.active {
+            background: var(--accent);
+            color: #FFFFFF;
+            border-color: var(--accent);
+        }
+
+        .cv-display {
+            display: none;
+        }
+
+        .cv-display.active {
+            display: block;
+        }
+
+        .achievement-item {
+            margin-bottom: 32px;
+            padding-bottom: 32px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .achievement-item:last-child {
+            border-bottom: none;
+        }
+
+        .achievement-year {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-tertiary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .achievement-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+        }
+
+        .achievement-desc {
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        footer {
+            padding: 60px 40px;
+            border-top: 1px solid var(--border);
+            background: var(--bg-secondary);
+            text-align: center;
+        }
+
+        footer p {
+            font-size: 12px;
+            color: var(--text-tertiary);
+            margin: 0;
+            letter-spacing: 0.5px;
+            line-height: 1.8;
+        }
+
+        @media (max-width: 768px) {
+            .hero-grid { grid-template-columns: 1fr; gap: 40px; }
+            .outcome-grid { grid-template-columns: 1fr; }
+            .btn-grid { grid-template-columns: 1fr; }
+            .link-row { flex-direction: column; gap: 12px; }
+            h1 { font-size: 32px; }
+            nav { gap: 16px; font-size: 12px; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">NESI HAVER</div>
+        <nav>
+            <a href="#work">Work</a>
+            <a href="#cv">Background</a>
+            <a href="https://www.linkedin.com/in/nesi-haver-mba-pmp-a204b326/" target="_blank">LinkedIn</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="hero-grid">
+            <div class="photo-section">
+                <div class="photo-frame">
+                    <img src="data:image/jpeg;base64,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" alt="Nesi Haver">
+                </div>
+                <div class="positioning">
+                    <p class="label">Positioning</p>
+                    <p>Product strategist who helps 0-1 companies build delivery excellence and scale with intent.</p>
+                </div>
+                <div class="divider">
+                    <p class="label">Based In</p>
+                    <p class="location">Israel - Hebrew & English</p>
+                </div>
+            </div>
+
+            <div class="cta-section">
+                <h1>Delivery Excellence, Strategically Built</h1>
+                <p class="intro-text">20+ years delivering enterprise-scale programs across Fortune 500 and emerging companies. Now focused on helping product leaders navigate complexity and build lasting competitive advantage.</p>
+
+                <button class="btn-primary" onclick="scheduleViaGmail()">SCHEDULE A CONVERSATION</button>
+                <p class="response-time">I respond within 24 hours - 30-minute call</p>
+
+                <div class="btn-grid">
+                    <a href="https://wa.me/972543024096" target="_blank" class="btn-secondary">📱 WhatsApp</a>
+                    <button class="btn-secondary" onclick="downloadVCard()">💳 Save Contact</button>
+                </div>
+
+                <div class="link-row">
+                    <a href="https://nesihaver-il.github.io/Nesi_Haver_Resume.pdf" target="_blank">Download Resume (PDF) -></a>
+                    <a href="https://www.linkedin.com/in/nesi-haver-mba-pmp-a204b326/" target="_blank">View on LinkedIn -></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="featured" id="work">
+        <div class="section-container">
+            <div class="section-header">
+                <h2>Featured Outcomes</h2>
+                <p>Strategic impact from recent work</p>
+            </div>
+            <div class="outcome-grid">
+                <div class="outcome-card">
+                    <p class="label">Delivery at Scale</p>
+                    <h3>$30M+ Programs Delivered</h3>
+                    <p>Enterprise-scale programs navigating complexity across Fortune 500 and startup environments. Led strategic initiatives at Cognyte, iMDsoft, Starhome, and Comverse.</p>
+                </div>
+                <div class="outcome-card">
+                    <p class="label">Strategy & Execution</p>
+                    <h3>Product Leadership</h3>
+                    <p>Bridging strategy and execution. Building teams that align around clear goals, drive clarity, and execute with precision in dynamic market conditions.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="background" id="cv">
+        <div class="section-container">
+            <div class="section-header">
+                <h2>Background & Credentials</h2>
+                <p>20+ years in product, strategy, and delivery</p>
+            </div>
+
+            <div class="cv-toggle">
+                <button class="tab-btn active" onclick="switchTab('summary')">Summary</button>
+                <button class="tab-btn" onclick="switchTab('experience')">Experience</button>
+                <button class="tab-btn" onclick="switchTab('credentials')">Credentials</button>
+            </div>
+
+            <div id="summary" class="cv-display active">
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <p class="label">Core Expertise</p>
+                        <p>Product strategy, delivery excellence, team leadership, complex program management, market entry, AI integration, enterprise software development.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="experience" class="cv-display">
+                <div class="timeline">
+                    <div class="achievement-item">
+                        <p class="achievement-year">20+ Years</p>
+                        <p class="achievement-title">Enterprise Product Leadership</p>
+                        <p class="achievement-desc">Cognyte, iMDsoft, Starhome, Comverse - Led $30M+ programs. Responsible for delivery excellence, product strategy, and team scaling.</p>
+                    </div>
+                    <div class="achievement-item">
+                        <p class="achievement-year">Recent Focus</p>
+                        <p class="achievement-title">AI & Modern Development</p>
+                        <p class="achievement-desc">AWS Bedrock, agent development, LangChain, RAG patterns. Building next-generation AI-powered solutions and infrastructure.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="credentials" class="cv-display">
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <p class="label">Education & Certifications</p>
+                        <p>MBA, Information Systems • PMP (Project Management Professional) • Continuous AI & Modern Tech Learning</p>
+                    </div>
+                    <div class="timeline-item">
+                        <p class="label">Languages</p>
+                        <p>Hebrew (Native) • English (Fluent)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>Based in Israel - Hebrew & English<br>
+        Good for: Strategy discussions, delivery optimization, building founding teams, scaling with intent<br>
+        <span style="color: var(--text-tertiary); font-size: 11px;">© 2026 Nesi Haver. All rights reserved.</span></p>
+    </footer>
+
+    <script>
+        function switchTab(tab) {
+            document.querySelectorAll('.cv-display').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+            document.getElementById(tab).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        function scheduleViaGmail() {
+            // Opens default email client to send calendar invite
+            const subject = 'Schedule a Conversation with Nesi Haver';
+            const body = 'Hi Nesi,\n\nI would like to schedule a 30-minute conversation to discuss strategy and delivery excellence.\n\nPlease add this to your calendar and let me know your availability.\n\nThank you!';
+            const mailtoLink = `mailto:nesihaver@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+            window.location.href = mailtoLink;
+        }
+
+        function downloadVCard() {
+            const vcard = `BEGIN:VCARD
+VERSION:3.0
+FN:Nesi Haver
+TITLE:Product Strategist
+TEL:+972-54-302-4096
+EMAIL:nesihaver@gmail.com
+URL:https://www.linkedin.com/in/nesi-haver-mba-pmp-a204b326/
+NOTE:Enterprise product leader, 20+ years delivery excellence
+ORG:Independent
+END:VCARD`;
+
+            const element = document.createElement('a');
+            element.setAttribute('href', 'data:text/vcard;charset=utf-8,' + encodeURIComponent(vcard));
+            element.setAttribute('download', 'nesi-haver.vcf');
+            element.style.display = 'none';
+            document.body.appendChild(element);
+            element.click();
+            document.body.removeChild(element);
+        }
+    </script>
+</body>
+</html>
