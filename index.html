@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nesi Haver - Product Strategist</title>
+    <title>Nesi Haver - Delivery Excellence</title>
     <style>
         :root {
             --bg-primary: #FAFAF8;
@@ -88,10 +88,7 @@
             align-items: start;
         }
 
-        .photo-section {
-            display: flex;
-            flex-direction: column;
-        }
+        .photo-section { display: flex; flex-direction: column; }
 
         .photo-frame {
             width: 280px;
@@ -100,6 +97,7 @@
             overflow: hidden;
             margin-bottom: 40px;
             box-shadow: 0 4px 20px rgba(26, 26, 24, 0.08);
+            background: #E8E6E0;
         }
 
         .photo-frame img {
@@ -161,8 +159,13 @@
             line-height: 1.8;
         }
 
+        .btn-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
         .btn-primary {
-            width: 100%;
             padding: 16px 32px;
             border-radius: 6px;
             border: none;
@@ -172,27 +175,16 @@
             font-weight: 600;
             letter-spacing: 0.5px;
             cursor: pointer;
-            margin-bottom: 16px;
             transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
             box-shadow: 0 4px 12px rgba(26, 26, 24, 0.12);
+            text-decoration: none;
+            display: block;
+            text-align: center;
         }
 
         .btn-primary:hover {
             transform: translateY(-2px);
             box-shadow: 0 6px 20px rgba(26, 26, 24, 0.16);
-        }
-
-        .response-time {
-            font-size: 12px;
-            color: var(--text-tertiary);
-            margin: 0 0 32px 0;
-        }
-
-        .btn-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-            margin-bottom: 28px;
         }
 
         .btn-secondary {
@@ -206,6 +198,9 @@
             letter-spacing: 0.5px;
             cursor: pointer;
             transition: all 0.3s ease;
+            text-decoration: none;
+            display: block;
+            text-align: center;
         }
 
         .btn-secondary:hover {
@@ -213,20 +208,11 @@
             border-color: var(--text-primary);
         }
 
-        .link-row {
-            display: flex;
-            gap: 24px;
+        .response-time {
             font-size: 12px;
+            color: var(--text-tertiary);
+            margin: 0;
         }
-
-        .link-row a {
-            color: var(--text-primary);
-            text-decoration: none;
-            font-weight: 500;
-            transition: opacity 0.3s ease;
-        }
-
-        .link-row a:hover { opacity: 0.6; }
 
         .featured {
             padding: 80px 40px;
@@ -350,13 +336,8 @@
             border-color: var(--accent);
         }
 
-        .cv-display {
-            display: none;
-        }
-
-        .cv-display.active {
-            display: block;
-        }
+        .cv-display { display: none; }
+        .cv-display.active { display: block; }
 
         .achievement-item {
             margin-bottom: 32px;
@@ -364,9 +345,7 @@
             border-bottom: 1px solid var(--border);
         }
 
-        .achievement-item:last-child {
-            border-bottom: none;
-        }
+        .achievement-item:last-child { border-bottom: none; }
 
         .achievement-year {
             font-size: 12px;
@@ -409,7 +388,6 @@
             .hero-grid { grid-template-columns: 1fr; gap: 40px; }
             .outcome-grid { grid-template-columns: 1fr; }
             .btn-grid { grid-template-columns: 1fr; }
-            .link-row { flex-direction: column; gap: 12px; }
             h1 { font-size: 32px; }
             nav { gap: 16px; font-size: 12px; }
         }
@@ -429,34 +407,33 @@
         <div class="hero-grid">
             <div class="photo-section">
                 <div class="photo-frame">
-                    <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wgARCAY/BLADASIAAhEBAxEB/8QAGgAAAwEBAQEAAAAAAAAAAAAAAQIDAAQFBv/EABgBAQEBAQEAAAAAAAAAAAAAAAABAgME/9oADAMBAAIQAxAAAALabs1aTaCkXSpm2bW3KTtHLWqjahtq22BtjbAI2NtjbY22DgRsuHwxiCHYAIqLRHhmU5pwwdsbbGwASuGwwcoGyimCpZRUFMEWxpMuooK6hyCygTDAYw2szo0rNRM6asVjqnFycuhNSTobA60lQWSFojUwKS55MlGm0oYgeddLyNdrFncSrqPEJ9U65F7E1OMUTWV21bbG2ybbLtiDNhDiLjgEE2LCrVIXHWYjB20AEVG0m8fWpY6nOLx2D4VQyOXQYUypWJl6TyPpfI9YEVgQbbG2xtgHDBwyHDK5TD4YYhoViCmRhiBKcMMUw+UmGxtlRshogYOwBN5ailV1CuTUfJg4CwDazMpKTokq7axyjS0uhxoqaRxt0pSLWZFm2pNw0rKywjA0ZtrEYEsUrmyGSqPBo6a8d81g4lKGdlUYBmwOSXWnTPMKJqDEG2ybbG2xtsbbG2y7bJmUjKMbbG2xiMEbEWj0eXrV4GywDRKfSKgKrojqC2TRZojKxk63fmx1bnro22rbYwITbY2wDhgkYZkK0pJ4oM8sWKWOqYZpsMMo+nhymHGwAUoqUscx1URNYqld5KkA21mBwMzE2xVdgmxBqTMvU0ejnoMRKEbAcvCaqrzzsmogZLEbaitFF2wXmBp5bMV1heeO88leeqTmtdOjihkRkCWBCNQA6wY4GOBtjbY22NtjbY22NtjbY22NtjbYkwHDo7o4WV5SrbMAwGGxNeha53C6UUgd4mL6VMmrIL0nktpTbWYEG2xtsYjDYFWebw7yBcQYM6oKyGnC5DlIxVaoZmHXYVWnqMuSspXUwIswdbBtjZzK1Q+NQXpSuZbz1lMdZjjKejnfNu3Oc24k60aM46pRSnVRqMUZMoFVaGKqMAYWDbA21m2xtsuwKWQLKzSxRMDA6wbY22NtjA4GOBiDbY2xBqIDbG2xtsbbG2wUcefpJzqXqgy0VNFAGkBURRWENINU90CuZ6zpQwrUgY6hCuRfTlu3M2nRotZTK1bbGwISuGy4Yripky5WRCQazaspxWIL3SsgBPcdUGssuFEbWYisuSkwEk1EfNaktK4TGWgIp1S1InCxiuGyYZ5EdTSWOrhc15eMdvFYNtZiMEjGUg22sGxBjgbA22NtjbY22NtjA4GINtjbY22NtjbYxGHTY22MDgY4B2NtiqVTy9UWprndlqWolhAFXML5rvLZFXEgbEUNMdGeuZ3loFB0tXkbDoArmzzzC02KvHF9Cm4-BrbattglSEEGotBjMy2gypS3NSVeTrrZ5etHtgbazbYakjKwQhwwWTFkQQ5TVXIc2iBQoV1DhjbazEYa/PXOm6p256mL7NnydyWcM-6fScorLWcVNYbJsQDbBwxtsDHA2IMQbbG2xtsbbGBwMcDHAxBtsbbGxwMcDHAxxgcDMDomN5Oys21AlQSR9UaKLFdVq7TXNuqrJdVC3EngMCjIdEVsNpCi0KzmdjcjYdKo-QYMoVhWoil2jqtptuNiaaovm846pEM66jAYykWNbmtmtwerE88Wj257bVtsbbG2xsCDUWBtqxGUjBNtjbY22NtilpdnPeZk56Rs1MV2a82JHj9CW8-drS64GLUmIQY4BBBtjbYxzmR1lTHWDEGxBtsbbG2xtsbbGBwMcDHAxxgcDMDomN5Oys21AlQSR9UaKLFdVq7TXNuqrJdVC3EngMCjIdEVsNpCi0KzmdjcjYdKo-QYMoVhWoil2jqtptuNiaaovm846pEM66jAYykWNbmtmtwerE88Wj257bVtsbbG2xsCDUWBtqxGUjBNtjbY22NtilpdnPeZk56Rs1MV2a82JHj9CW8-drS64GLUmIQY4BBBtjbYxzmR1lTHWDEGxBtsbbG2xtsbbGBwMcDHAxxgcDMDomN5Oys21AlQSR9UaKLFdVq7TXNuqrJdVC3EngMCjIdEVsNpCi0KzmdjcjYdKo-QYMoVhWoil2jqtptuNiaaovm846pEM66jAYykWNbmtmtwerE88Wj257bVtsbbG2xsCDUWBtqxGUjBNtjbY22NtilpdnPeZk56Rs1MV2a82JHj9CW8-drS64GLUmIQY4BBBtjbYxzmR1lTHWDEGxBtsbbG2xtsbbGBwMcDHAxxgcDMDomN5Oys21AlQSR9UaKLFdVq7TXNuqrJdVC3EngMCjIdEVsNpCi0KzmdjcjYdKo-QYMoVhWoil2jqtptuNiaaovm846pEM66jAYykWNbmtmtwerE88Wj257bVtsbbG2xsCDUWBtqxGUjBNtjbY22NtilpdnPeZk56Rs1MV2a82JHj9CW8-drS64GLUmIQY4BBBtjbYxzmR1lTHWDEGxBtsbbG2xtsbbGBwMcDHAxxgcDMDomN5Oys21AlQSR9UaKLFdVq7TXNuqrJdVC3EngMCjIdEVsNpCi0KzmdjcjYdKo-QYMoVhWoil2jqtptuNiaaovm846pEM66jAYykWNbmtmtwerE88Wj257bVtsbbG2xsBCbEW2NtjbY22NtilpdnPeZk56Rs1MV2a82JHj9CW8-drS64GLUmIQY4BBBtjbYxzmR1lTHWDEGxBtsbbG2xtsbbGBwMcDHAxxgcDMDomN5Oys21AlQSR9UaKLFdVq7TXNuqrJdVC3EngMCjIdEVsNpCi0KzmdjcjYdKo-QYMoVhWoil2jqtptuNiaaovm846pEM66jAYykWNbmtmtwerE88Wj257bVtsbbG2xsBCbEW2NtjbY22NtilpdnPeZk56Rs1MV2a82JHj9CW8-drS64GLUmIQY4BBBtjbYxzmR1lTHWDEGxBtsbbG2xtsbbGBwMcDHAxxgcDMDomN5Oys21AlQSR9UaKLFdVq7TXNuqrJdVC3EngMCjIdEVsNpCi0KzmdjcjYdKo-QYMoVhWoil2jqtptuNiaaovm846pEM66jAYykWNbmtmtwerE88Wj257bVtsbbG2ybjHaEW2NtjbY22NtilpdnPeZk56Rs1MV2a82JHj9CW8-drS64GLUmIQY4BBBtjbYxzmR1lTHWDEGxBtsbbG2xtsbbGBwMcDHAxxgcDMDomN5Oys21AlQSR9UaKLFdVq7TXNuqrJdVC3EngMCjIdEVsNpCi0KzmdjcjYdKo-QYMoVhWoil2jqtptuNiaaovm846pEM66jAYykWNbmtmtwerE88Wj257bVtsbbG2ybjHaEW2NtjbY22NtilpdnPeZk56Rs1MV2a82JHj9CW8-drS64GLUmIQY4BBBtjbYxzmR1lTHWDEGxBtsbbG2xtsbbGBwMcDHAxxgcDMDomN5Oys21AlQSR9UaKLFdVq7TXNuqrJdVC3EngMCjIdEVsNpCi0KzmdjcjYdKo-QYMoVhWoil2jqtptuNiaaovm846pEM66jAYykWNbmtmtwerE88Wj257bVtsbbG2ybjHaEW2NtjbY22NtilpdnPeZk56Rs1MV2a82JHj9CW8-drS64GLUmIQY4BBBtjbYxzmR1lTHWDEGxBtsbbG2xtsbbGBwMcDHAxxgcDMDomN5Oys21AlQSR9UaKLFdVq7TXNuqrJdVC3EngMCjIdEVsNpCi0KzmdjcjYdKo-QYMoVhWoil2jqtptuNiaaovm846pEM66jAYykWNbmtmtwerE88Wj257bVtsbbG2ybjHaEW2NtjbY22NtilpdnPeZk56Rs1MV2a82JHj9CW8-drS64GLUmIQY4BBBtjbYxzmR1lTHWDEGxBtsbbG2xtsbbGBwMcDHAxxgcDMDomN5Oys21AlQSR9UaKLFdVq7TXNuqrJdVC3EngMCjIdEVsNpCi0KzmdjcjYdKo-QYMoVhWoil2jqtptuNiaaovm846pEM66jAYykWNbmtmtwerE88Wj257bVtsbbG2ybjHaEW2NtjbY22NtilpdnPeZk56Rs1MV2a82JHj9CW8-drS64GLUmIQY4BBBtjbYxzmR1lTHWDEGxBtsbbG2xtsbbGBwMcDHAxxgcDMDomN5Oys21AlQSR9UaKLFdVq7TXNuqrJdVC3EngMCjIdEVsNpCi0KzmdjcjYdKo-QYMoVhWoil2jqtptuNiaaovm846pEM66jAYykWNbmtmtwerE88Wj257bVtsbbG2ybjHaEW2NtjbY22NtilpdnPeZk56Rs1MV2a82JHj9CW8-drS64GLUmIQY4BBBtjbYxzmR1lTHWDEGxBtsbbG2xtsbbGBwMcDHAxxgcDMDomN5Oys21AlQSR9UaKLFdVq7TXNuqrJdVC3EngMCjIdEVsNpCi0KzmdjcjYdKo-QYMoVhWoil2jqtptuNiaaovm846pEM66jAYykWNbmtmtwerE88Wj257bVtsbbG2ybjHaEW2NtjbY22NtilpdnPeZk56Rs1MV2a82JHj9CW8-drS64GLUmIQY4BBBtjbYxzmR1lTHWDEGxBtsbbG2xtsbbGBwMcDHAxxgcDMDomN5Oys21AlQSR9UaKLFdVq7TXNuqrJdVC3EngMCjIdEVsNpCi0KzmdjcjYdKo-QYMoVhWoil2jqtptuNiaaovm846pEM66jAYykWNbmtmtwerE88Wj257bVtsbbG2ybjHaEW2NtjbY22NtilpdnPeZk56Rs1MV2a82JHj9CW8-drS64GLUmIQY4BBBtjbYxzmR1lTHWDEGxBtsbbG2xtsbbGBwMcDHAxxgcDMDomN5Oys21AlQSR9UaKLFdVq7TXNuqrJdVC3EngMCjIdEVsNpCi0KzmdjcjYdKo-QYMoVhWoil2jqtptuNiaaovm846pEM66jAYykWNbmtmtwerE88Wj257bVtsbbG2ybjHaEW2NtjbY22NtilpdnPeZk56Rs1MV2a82JHj9CW8-drS64GLUmIQY4BBBtjbYxzmR1lTHWDEGxBtsbbG2xtsbbGBwMcDHAxxgcDMDomN5Oys21AlQSR9UaKLFdVq7TXNuqrJdVC3EngMCjIdEVsNpCi0KzmdjcjYdKo-QYMoVhWoil2jqtptuNiaaovm846pEM66jAYykWNbmtmtwerE88Wj257bVtsbbG2ybjHaEW2NtjbY22NtilpdnPeZk56Rs1MV2a82JHj9CW8-drS64GLUmIQY4BBBtjbYxzmR1lTHWDEGxBtsbbG2xtsbbGBwMcDHAxxgcDMDomN5Oys21AlQSR9UaKLFdVq7TXNuqrJdVC3EngMCjIdEVsNpCi0KzmdjcjYdKo-QYMoVhWoil2jqtptuNiaaovm846pEM66jAYykWNbmtmtwerE88Wj257bVtsbbG2y7bJmUjKMbbG2xiMEbEWj0eXrV4GywDRKfSKgKrojqC2TRZojKxk63fmx1bnro22rbYwITbY2wDhgkYZkK0pJ4oM8sWKWOqYZpsMMo+nhymHGwAUoqUscx1URNYqld5KkA21mBwMzE2xVdgmxBqTMvU0ejnoMRKEbAcvCaqrzzsmogZLEbaitFF2wXmBp5bMV1heeO88leeqTmtdOjihkRkCWBCNQA6wY4GOBtjbY22NtjbY22NtjbY22NtjbYkwHDo7o4WV5SrbMAwGGxNeha53C6UUgd4mL6VMmrIL0nktpTbWYEG2xtsYjDYFWebw7yBcQYM6oKyGnC5DlIxVaoZmHXYVWnqMuSspXUwIswdbBtjZzK1Q+NQXpSuZbz1lMdZjjKejnfNu3Oc24k60aM46pRSnVRqMUZMoFVaGKqMAYWDbA21m2xtsuwKWQLKzSxRMDA6wbY22NtjA4GOBiDbY2xBqIDbG2xtsbbG2wUcefpJzqXqgy0VNFAGkBURRWENINU90CuZ6zpQwrUgY6hCuRfTlu3M2nRotZTK1bbGwISuGy4Yripky5WRCQazaspxWIL3SsgBPcdUGssuFEbWYisuSkwEk1EfNaktK4TGWgIp1S1InCxiuGyYZ5EdTSWOrhc15eMdvFYNtZiMEjGUg22sGxBjgbA22NtjbY22NtjA4GINtjbY22NtjbYxGHTY22MDgY4B2NtiqVTy9UWprndlqWolhAFXML5rvLZFXEgbEUNMdGeuZ3loFB0tXkbDoArmzzzC02KvHF9Cm4+BrbattglSEEGotBjMy2gypS3NSVeTrrZ5etHtgbazbYakjKwQhwwWTFkQQ5TVXIc2iBQoV1DhjbazEYa/PXOm6p256mL7NnydyWcM+6fScorLWcVNYbJsQDbBwxtsDHA2IMQbbG2xtsbbGBwMcDHAxBtsbbGxwMcDHAxxgcDMDomN5Oys21AlQSR9UaKLFdVq7TXNuqrJdVC3EngMCjIdEVsNpCi0KzmdjcjYdKo+QYMoVhWoil2jqtptuNiaaovm846pEM66jAYykWNbmtmtwerE88Wj257bVtsbbG2xtsbbBNtjbYkxGNtjbY22NtjbYkxGNtjbY22NtjbYkxGNtjbY22NtjbYkxGNtjbY22NtjbYkxGNtjbY22NtjbYkxGNtjbY22NtjbYkxGNtjbY22NtjbYkxGNtjbY22NtjbY=" alt="Nesi Haver">
+                    <img src="https://nesihaver-il.github.io/profile-photo.jpg" alt="Nesi Haver">
                 </div>
                 <div class="positioning">
-                    <p class="label">Positioning</p>
-                    <p>Product strategist who helps 0-1 companies build delivery excellence and scale with intent.</p>
+                    <p class="label">Core Focus</p>
+                    <p>Delivery excellence. Complex program orchestration. Revenue protection through execution discipline.</p>
                 </div>
                 <div class="divider">
                     <p class="label">Based In</p>
-                    <p class="location">Israel - Hebrew & English</p>
+                    <p class="location">Israel - Hebrew & English - Global Teams</p>
                 </div>
             </div>
 
             <div class="cta-section">
-                <h1>Delivery Excellence, Strategically Built</h1>
-                <p class="intro-text">20+ years delivering enterprise-scale programs across Fortune 500 and emerging companies. Now focused on helping product leaders navigate complexity and build lasting competitive advantage.</p>
+                <h1>The Bridge: Commitment to Delivery</h1>
+                <p class="intro-text">Twenty years closing the gap between what gets committed and what gets delivered. From pre-sales through customer acceptance - I bring structure to complex programs without losing pace.</p>
 
-                <button class="btn-primary" onclick="scheduleViaGmail()">SCHEDULE A CONVERSATION</button>
-                <p class="response-time">I respond within 24 hours - 30-minute call</p>
+                <div class="btn-grid" style="margin-bottom: 48px;">
+                    <a href="https://www.linkedin.com/in/nesi-haver-mba-pmp-a204b326/" target="_blank" class="btn-primary">VIEW ON LINKEDIN</a>
+                    <a href="https://nesihaver-il.github.io/Nesi_Haver_Resume.pdf" target="_blank" class="btn-primary">DOWNLOAD RESUME</a>
+                </div>
 
                 <div class="btn-grid">
-                    <a href="https://wa.me/972543024096" target="_blank" class="btn-secondary">📱 WhatsApp</a>
-                    <button class="btn-secondary" onclick="downloadVCard()">💳 Save Contact</button>
+                    <a href="https://wa.me/972543024096" target="_blank" class="btn-secondary">💬 WhatsApp</a>
+                    <button class="btn-secondary" onclick="downloadVCard()">✉️ Save Contact</button>
                 </div>
 
-                <div class="link-row">
-                    <a href="https://nesihaver-il.github.io/Nesi_Haver_Resume.pdf" target="_blank">Download Resume (PDF) -></a>
-                    <a href="https://www.linkedin.com/in/nesi-haver-mba-pmp-a204b326/" target="_blank">View on LinkedIn -></a>
-                </div>
+                <p class="response-time" style="margin-top: 32px;">I respond within 24 hours - 30-minute call</p>
             </div>
         </div>
     </section>
@@ -470,13 +447,13 @@
             <div class="outcome-grid">
                 <div class="outcome-card">
                     <p class="label">Delivery at Scale</p>
-                    <h3>$30M+ Programs Delivered</h3>
-                    <p>Enterprise-scale programs navigating complexity across Fortune 500 and startup environments. Led strategic initiatives at Cognyte, iMDsoft, Starhome, and Comverse.</p>
+                    <h3>$30M+ in Flight</h3>
+                    <p>Owns delivery of flagship products and concurrent multi-region portfolios at Cognyte. Enforces scope discipline and quality gateways that protect both revenue and margins across complex programs.</p>
                 </div>
                 <div class="outcome-card">
-                    <p class="label">Strategy & Execution</p>
-                    <h3>Product Leadership</h3>
-                    <p>Bridging strategy and execution. Building teams that align around clear goals, drive clarity, and execute with precision in dynamic market conditions.</p>
+                    <p class="label">Execution & Alignment</p>
+                    <h3>Cross-Functional Orchestration</h3>
+                    <p>Acts as the business-aware gatekeeper between GCO commitments, product definition, and delivery capability. Keeps C-level visibility on revenue milestones while managing continuous risk escalation.</p>
                 </div>
             </div>
         </div>
@@ -486,7 +463,7 @@
         <div class="section-container">
             <div class="section-header">
                 <h2>Background & Credentials</h2>
-                <p>20+ years in product, strategy, and delivery</p>
+                <p>Twenty years in enterprise delivery and program management</p>
             </div>
 
             <div class="cv-toggle">
@@ -498,8 +475,8 @@
             <div id="summary" class="cv-display active">
                 <div class="timeline">
                     <div class="timeline-item">
-                        <p class="label">Core Expertise</p>
-                        <p>Product strategy, delivery excellence, team leadership, complex program management, market entry, AI integration, enterprise software development.</p>
+                        <p class="label">Expertise</p>
+                        <p>Delivery program management, complex project orchestration, cross-functional alignment, enterprise customer delivery, risk management, budget discipline, scope gatekeeping, R&D coordination.</p>
                     </div>
                 </div>
             </div>
@@ -507,14 +484,24 @@
             <div id="experience" class="cv-display">
                 <div class="timeline">
                     <div class="achievement-item">
-                        <p class="achievement-year">20+ Years</p>
-                        <p class="achievement-title">Enterprise Product Leadership</p>
-                        <p class="achievement-desc">Cognyte, iMDsoft, Starhome, Comverse - Led $30M+ programs. Responsible for delivery excellence, product strategy, and team scaling.</p>
+                        <p class="achievement-year">2022-Present</p>
+                        <p class="achievement-title">Cognyte - Product Delivery Manager</p>
+                        <p class="achievement-desc">Owns delivery of $30M+ flagship product and 3 concurrent law enforcement programs. Leads 8-12 contributors across R&D with matrix accountability. Runs AI Champions group converting team innovations into deployed agents.</p>
                     </div>
                     <div class="achievement-item">
-                        <p class="achievement-year">Recent Focus</p>
-                        <p class="achievement-title">AI & Modern Development</p>
-                        <p class="achievement-desc">AWS Bedrock, agent development, LangChain, RAG patterns. Building next-generation AI-powered solutions and infrastructure.</p>
+                        <p class="achievement-year">2020-2022</p>
+                        <p class="achievement-title">Cognyte - Project Delivery & Product Champion</p>
+                        <p class="achievement-desc">Managed multi-region Tactical Intelligence portfolio. Maintained C-level visibility on revenue milestones across concurrent high-value customer engagements.</p>
+                    </div>
+                    <div class="achievement-item">
+                        <p class="achievement-year">2016-2020</p>
+                        <p class="achievement-title">iMDsoft - Project Manager</p>
+                        <p class="achievement-desc">Delivered Nordic healthcare digital transformation end-to-end. Enforced zero-bug policy across development and deployment phases.</p>
+                    </div>
+                    <div class="achievement-item">
+                        <p class="achievement-year">2006-2015</p>
+                        <p class="achievement-title">Starhome, Comverse - Technical Leadership</p>
+                        <p class="achievement-desc">Executed turnkey deployments for global telecom customers. Led Tier 3.5 support and on-premises implementations across African and EMEA accounts.</p>
                     </div>
                 </div>
             </div>
@@ -522,8 +509,12 @@
             <div id="credentials" class="cv-display">
                 <div class="timeline">
                     <div class="timeline-item">
-                        <p class="label">Education & Certifications</p>
-                        <p>MBA, Information Systems • PMP (Project Management Professional) • Continuous AI & Modern Tech Learning</p>
+                        <p class="label">Certifications</p>
+                        <p>PMP (Project Management Professional) • ACP-PMI (Agile Certified Practitioner) • AI Platforms & Agent Development (2024-Present) • AWS Cloud Essentials for Business Leaders</p>
+                    </div>
+                    <div class="timeline-item">
+                        <p class="label">Education</p>
+                        <p>MBA, Information Systems • Ono Academic College • PMP Examination Preparation, Technion</p>
                     </div>
                     <div class="timeline-item">
                         <p class="label">Languages</p>
@@ -535,9 +526,9 @@
     </section>
 
     <footer>
-        <p>Based in Israel - Hebrew & English<br>
-        Good for: Strategy discussions, delivery optimization, building founding teams, scaling with intent<br>
-        <span style="color: var(--text-tertiary); font-size: 11px;">© 2026 Nesi Haver. All rights reserved.</span></p>
+        <p>Based in Israel - Hebrew & English - Global Teams<br>
+        Focus: Delivery excellence, program orchestration, revenue protection<br>
+        <span style="color: var(--text-tertiary); font-size: 11px;">© 2026 Nesi Haver</span></p>
     </footer>
 
     <script>
@@ -548,23 +539,15 @@
             event.target.classList.add('active');
         }
 
-        function scheduleViaGmail() {
-            // Opens default email client to send calendar invite
-            const subject = 'Schedule a Conversation with Nesi Haver';
-            const body = 'Hi Nesi,\n\nI would like to schedule a 30-minute conversation to discuss strategy and delivery excellence.\n\nPlease add this to your calendar and let me know your availability.\n\nThank you!';
-            const mailtoLink = `mailto:nesihaver@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-            window.location.href = mailtoLink;
-        }
-
         function downloadVCard() {
             const vcard = `BEGIN:VCARD
 VERSION:3.0
 FN:Nesi Haver
-TITLE:Product Strategist
+TITLE:Product Delivery Manager
 TEL:+972-54-302-4096
 EMAIL:nesihaver@gmail.com
 URL:https://www.linkedin.com/in/nesi-haver-mba-pmp-a204b326/
-NOTE:Enterprise product leader, 20+ years delivery excellence
+NOTE:Enterprise delivery leader, 20+ years closing commitment to delivery gap
 ORG:Independent
 END:VCARD`;
 
