@@ -330,7 +330,7 @@
                 </div>
                 <div class="positioning">
                     <p class="label">What I Do</p>
-                    <p>Deliver at scale. Bridge strategy and execution. Identify what falls through organizational cracks.</p>
+                    <p>Deliver at scale. Create clarity across complexity. Enable better decision.</p>
                 </div>
                 <div class="divider">
                     <p class="label">Based In</p>
@@ -352,7 +352,9 @@
                     <button class="btn-secondary" onclick="downloadVCard()">✉️ Save Contact</button>
                 </div>
 
-                <p class="response-time" style="margin-top: 32px;">I respond within 24 hours - 30-minute call</p>
+                <div class="btn-grid" style="margin-top: 24px;">
+                    <button class="btn-secondary" onclick="scheduleViaOutlook()" style="grid-column: 1 / -1;">📅 Schedule Meeting</button>
+                </div>
             </div>
         </div>
     </section>
@@ -403,6 +405,13 @@ END:VCARD`;
             document.body.appendChild(element);
             element.click();
             document.body.removeChild(element);
+        }
+
+        function scheduleViaOutlook() {
+            const subject = 'Schedule a Conversation with Nesi Haver';
+            const body = 'Hi Nesi,\n\nI would like to schedule a conversation to discuss strategy and delivery excellence.\n\nPlease let me know your availability.\n\nThank you!';
+            const mailtoLink = `mailto:nesihaver@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+            window.location.href = mailtoLink;
         }
     </script>
 </body>
